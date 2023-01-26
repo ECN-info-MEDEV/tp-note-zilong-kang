@@ -105,6 +105,9 @@ private static final int LINES = 12;
                 }
                 currentStep++;
             }
+            if(currentStep == LINES){
+                System.out.println("All 12 chances were used. Start next tour");
+            }
             currentTour++;
         }
 
