@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 public class Game {
-
+private static final int LINES = 12;
     private static final int PIONSNUMBER = 4;
     /**
      * 1 for player1, 2 for player2.
@@ -33,7 +33,7 @@ public class Game {
     /**
      * records all pions entered by decodeur.
      */
-    private int[][] plateau = new int[12][4];
+    private int[][] plateau = new int[LINES][4];
     /**
      * to indicates the corresponding results for each enter of decodeur.
      */
@@ -75,17 +75,17 @@ public class Game {
             } else {
                 currentCoudeur = 2;
             }
+            System.out.println("\ncurrent coudeur is player" + currentCoudeur + ", No." + (currentTour + 1) + " tour");
+            System.out.println("codeur please enter 4 colors(1-6), seperated by space, like: \"1 3 4 5\"");
 
-            if (!readInputPions(currentStep)) {
+            if (!readCode(currentStep)) {
                 System.out.println("invalid enter, try again");
                 continue;
             }
-            System.out.println("current coudeur is player" + currentCoudeur+", No."+currentTour+" tour");
-            System.out.println("codeur please enter 4 colors(1-6), seperated by space, like: \"1 3 4 5\"");
 
             //decodeur actions.
-            while (currentStep < 12) {
-                System.out.println("decodeur No." + (currentStep + 1) + " try");
+            while (currentStep < LINES) {
+                System.out.println("\ndecodeur No." + (currentStep + 1) + " try");
                 System.out.println("decodeur please enter 4 pions colors(1-6)");
                 if (!readInputPions(currentStep)) {
                     System.out.println("invalid input, please enter again");
@@ -93,17 +93,15 @@ public class Game {
                 }
 
                 // whether decodeur's enter is correct
-                if (true) {//correct
+                if (GuessJudge.getGuessResult(plateau[currentStep], currentPions)) {//correct
                     System.out.println("current tour is over");
                     if (currentCoudeur == 1) {
-                        score[0] += currentStep;
+                        score[0] += currentStep + 1;
                     } else {
-                        score[1] += currentStep;
+                        score[1] += currentStep + 1;
                     }
-                    System.out.println("current score:\n player1:"+score[0]+", player2:"+ score[1]);
+                    System.out.println("current score:\n    player1 : " + score[0] + ", player2 : " + score[1]);
                     break; // current tour is over
-                } else {
-                    System.out.println("decodeur try again");
                 }
                 currentStep++;
             }
@@ -112,8 +110,10 @@ public class Game {
 
         if (score[0] > score[1]) {
             System.out.println("winner is player1");
-        } else {
+        } else if (score[0] < score[1]) {
             System.out.println("winner is player2");
+        } else {
+            System.out.println("match");
         }
         System.out.println("game over");
 
@@ -123,7 +123,7 @@ public class Game {
      * refresh game parameters at the beginning of each tour.
      */
     public void refreshPlateau() {
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < LINES; i++) {
             for (int j = 0; j < 4; j++) {
                 plateau[i][j] = 0;
             }
@@ -142,7 +142,7 @@ public class Game {
     public boolean readInputPions(int currentStep) {
         Scanner scanner = new Scanner(System.in);
         String inputStr = scanner.nextLine();
-        String input[] = inputStr.split(" ");
+        String input[] = inputStr.split("\\s+");
         if (input.length != 4) {
             return false;
         }
@@ -155,6 +155,30 @@ public class Game {
         return true;
     }
 
+    /**
+     * Read the pattern setted by codeur.
+     * @param currentStep one of the 12 tours.
+     * @return  pattern entered by codeur.
+     */
+    public boolean readCode(int currentStep) {
+        Scanner scanner = new Scanner(System.in);
+        String inputStr = scanner.nextLine();
+        String input[] = inputStr.split("\\s+");
+        if (input.length != 4) {
+            return false;
+        }
+        for (int i = 0; i < 4; i++) {
+            if (Integer.parseInt(input[i]) > 6 || Integer.parseInt(input[i]) <= 0) {
+                return false;
+            }
+            currentPions[i] = Integer.parseInt(input[i]);
+        }
+        return true;
+    }
+
+    /**
+     * Set the total tour of game.
+     */
     public void GameInitialization() {
         SecureRandom rd = new SecureRandom();
         boolean player1Code = false;

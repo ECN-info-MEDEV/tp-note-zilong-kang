@@ -24,4 +24,10 @@ public class GameTest {
         game.readInputPions(2);
         System.out.println(game.getCurrentPions());
     }
+
+    @Test
+    public void readCodeTest(){
+        game.readCode(1);
+        System.out.println(game.getCurrentPions());
+    }
 }

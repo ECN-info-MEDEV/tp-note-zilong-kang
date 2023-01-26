@@ -27,7 +27,12 @@ public class GuessJudge {
         guessPrompt = new String[4];
     }
 
-
+    /**
+     *
+     * @param guessInput input of decodeur.
+     * @param answer pattern set by codeur.
+     * @return feedback
+     */
     public static String[] getGuessPrompt(int[] guessInput, int[] answer) {
         guessPrompt = new String[4];
         /*
@@ -73,12 +78,12 @@ public class GuessJudge {
         }
         System.out.println(guessPrompt);
         guessResult = Arrays.equals(guessPrompt, new String[]{"B", "B", "B", "B"});
-        System.out.println(guessResult);
+        System.out.println("results: "+guessResult);
         return guessPrompt;
     }
 
     /**
-     *
+     * whether the input of decodeur was correct.
      * @param guessInput
      * @param answer
      * @return boolean guessResult
@@ -126,9 +131,9 @@ public class GuessJudge {
             guessPrompt[j] = "B";
             j += 1;
         }
-        System.out.println(Arrays.toString(guessPrompt));
+        System.out.println("results:"+Arrays.toString(guessPrompt));
         guessResult = Arrays.equals(guessPrompt, new String[]{"N", "N", "N", "N"});
-        System.out.println(guessResult);
+        //System.out.println(guessResult);
         return guessResult;
     }
 
