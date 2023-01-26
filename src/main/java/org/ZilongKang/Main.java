@@ -4,8 +4,13 @@ package org.ZilongKang;
  * java doc test.
  */
 public class Main {
+    /**
+     * Enter of game.
+     * @param args
+     */
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Game game = new Game();
+        game.runTour();
     }
 
 }

@@ -2,8 +2,6 @@ package org.ZilongKang;
 
 import org.junit.Test;
 
-import java.awt.font.GlyphMetrics;
-
 public class GameTest {
     Game game = new Game();
     @Test
@@ -13,6 +11,6 @@ public class GameTest {
 
     @Test
     public void ToutTest(){
-        game.Tour();
+        game.runTour();
     }
 }
