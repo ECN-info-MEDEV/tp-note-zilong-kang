@@ -13,4 +13,15 @@ public class GameTest {
     public void ToutTest(){
         game.runTour();
     }
+    @Test
+    public void refreshPalteauTest(){
+        game.setPlateau(new int[][]{{1,2,3,4},{1,1,1,1},{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4}});
+        game.refreshPlateau();
+    }
+
+    @Test
+    public void readInputPionsTest(){
+        game.readInputPions(2);
+        System.out.println(game.getCurrentPions());
+    }
 }

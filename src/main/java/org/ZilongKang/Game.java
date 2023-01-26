@@ -51,8 +51,11 @@ public class Game {
      */
     private final int[] color = {1, 2, 3, 4, 5, 6};
 
+    /**
+     * Initialization
+     */
     public Game() {
-        GameInitilization();
+        GameInitialization();
     }
 
     /**
@@ -100,7 +103,7 @@ public class Game {
                     System.out.println("current score:\n player1:"+score[0]+", player2:"+ score[1]);
                     break; // current tour is over
                 } else {
-                    System.out.println("try again");
+                    System.out.println("decodeur try again");
                 }
                 currentStep++;
             }
@@ -152,7 +155,7 @@ public class Game {
         return true;
     }
 
-    public void GameInitilization() {
+    public void GameInitialization() {
         SecureRandom rd = new SecureRandom();
         boolean player1Code = false;
         boolean player2Code = false;
@@ -239,5 +242,13 @@ public class Game {
 
     public int[] getColor() {
         return color;
+    }
+
+    public int[] getCurrentPions() {
+        return currentPions;
+    }
+
+    public void setCurrentPions(int[] currentPions) {
+        this.currentPions = currentPions;
     }
 }
